@@ -1,0 +1,44 @@
+<div class="controls">
+    <?= /** @var \Icinga\Web\Widget\Tabs $tabs */ $tabs ?>
+</div>
+<div class="content">
+    <?= /** @var \Icinga\Web\View $this */ $this->qlink(
+        $this->translate('Add'),
+        'bridgedays_output_rt/config/add',
+        null,
+        [
+            'class'            => 'button-link',
+            'data-base-target' => '_next',
+            'icon'             => 'plus',
+            'title'            => $this->translate('Add RT instance')
+        ]
+    ) ?>
+
+    <table data-base-target="_next" class="table-row-selectable common-table">
+        <thead>
+            <tr>
+                <th><?= $this->translate('Name') ?></th>
+                <th><?= $this->translate('URL') ?></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php /** @var \Icinga\Repository\Repository $repo */ foreach ($repo as $rt): ?>
+            <tr href="<?= $this->href('bridgedays_output_rt/config/edit', ['name' => $rt->name]) ?>">
+                <td><?= $this->escape($rt->name) ?></td>
+                <td><?= $this->escape($rt->url) ?></td>
+                <td><?= $this->qlink(
+                    null,
+                    'bridgedays_output_rt/config/remove',
+                    ['name' => $rt->name],
+                    [
+                        'class'            => 'action-link',
+                        'icon'             => 'trash',
+                        'title'            => $this->translate('Remove RT instance')
+                    ]
+                ) ?></td>
+            </tr>
+        <?php endforeach ?>
+        </tbody>
+    </table>
+</div>
