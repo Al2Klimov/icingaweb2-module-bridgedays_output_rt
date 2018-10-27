@@ -1,0 +1,4 @@
+Module: bridgedays_output_rt
+Description: RT output for Bridge Days
+ Easily perform bulk holiday requests
+ to RequestTracker!
