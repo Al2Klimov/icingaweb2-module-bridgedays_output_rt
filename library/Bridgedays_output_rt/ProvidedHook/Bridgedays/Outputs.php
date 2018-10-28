@@ -12,8 +12,17 @@ class Outputs extends OutputsHook
     {
         $inputs = [];
 
-        foreach ((new RtsRepo)->select(['name', 'url']) as $rt) {
-            $inputs[] = new RtOutput($rt->name, $rt->url);
+        foreach ((new RtsRepo)->select([
+            'name',
+            'url',
+            'queues',
+            'cfHolidayStart',
+            'cfHolidayEnd',
+            'cfHolidayDays',
+            'cfHolidayDateFormat',
+            'cfs'
+        ]) as $rt) {
+            $inputs[] = new RtOutput($rt);
         }
 
         return $inputs;

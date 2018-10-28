@@ -6,7 +6,16 @@ use Icinga\Repository\IniRepository;
 
 class RtsRepo extends IniRepository
 {
-    protected $queryColumns = ['rt' => ['name', 'url']];
+    protected $queryColumns = ['rt' => [
+        'name',
+        'url',
+        'queues',
+        'cfHolidayStart',
+        'cfHolidayEnd',
+        'cfHolidayDays',
+        'cfHolidayDateFormat',
+        'cfs'
+    ]];
 
     protected $triggers = ['rt'];
 
