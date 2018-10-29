@@ -18,7 +18,8 @@ class ConfigForm extends RepositoryForm
         $this->addElement('text', 'queues', [
             'label'       => $this->translate('RT queues'),
             'description' => $this->translate('RT queues for holidays as JSON, e.g. ["Holiday Requests"]'),
-            'required'    => true
+            'required'    => true,
+            'value'       => '[]'
         ]);
 
         $this->addElement('text', 'cfHolidayStart', [
@@ -46,7 +47,8 @@ class ConfigForm extends RepositoryForm
         $this->addElement('text', 'cfs', [
             'label'       => $this->translate('Other fields'),
             'description' => $this->translate('Other RT custom fields as JSON, e.g. {"Company": {"Facebook": 1, "Amazon": 2, "Netflix": 3, "Google": 4}}'),
-            'required'    => true
+            'required'    => true,
+            'value'       => '{}'
         ]);
     }
 
