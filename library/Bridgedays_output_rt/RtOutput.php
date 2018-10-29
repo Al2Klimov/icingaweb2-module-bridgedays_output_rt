@@ -3,6 +3,7 @@
 namespace Icinga\Module\Bridgedays_output_rt;
 
 use DateTime;
+use Exception;
 use Icinga\Module\Bridgedays\Forms\ImportForm;
 use Icinga\Module\Bridgedays\Intrface\Output;
 use Icinga\Web\Notification;
@@ -171,12 +172,18 @@ EOF
                 $ticket .= "CF-$k: $v\n";
             }
 
-            $curl->request(
+            $res = $curl->request(
                 'POST',
                 $url,
                 ['User-Agent: Mozilla/4.0', 'Content-Type: application/x-www-form-urlencoded'],
                 'content=' . rawurlencode($ticket)
             );
+
+            $matches = [];
+
+            if (preg_match('~\ART/\S+ (\d+) (.+)$~m', $res, $matches) && $matches[1] !== '200') {
+                throw new Exception(sprintf('RT: %s', $matches[2]));
+            }
         }
 
         Notification::success(sprintf(mt('bridgedays_output_rt', 'Created %d holiday requests'), count($bridgedays)));
