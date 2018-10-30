@@ -182,7 +182,7 @@ EOF
             $matches = [];
 
             if (preg_match('~\ART/\S+ (\d+) (.+)$~m', $res, $matches) && $matches[1] !== '200') {
-                throw new Exception(sprintf('RT: %s', $matches[2]));
+                throw new Exception(sprintf(mt('bridgedays_output_rt', 'RT: %s'), $matches[2]));
             }
         }
 
